@@ -28,17 +28,14 @@ has_many : purchasers
 | category        | string     | null: false                    |
 | condition       | string     | null: false                    |
 | delivery_charge | string     | null: false                    |
-| area            | string     | null: false                    |
-| days            | string     | null: false                    |
+| prefecture_id   | integer    | null: false                    |
+| shipping_day    | string     | null: false                    |
 | price           | integer    | null: false                    |
-| tax             | integer    | null: false                    |
-| benefit         | integer    | null: false                    |
-| user_id         | references | null: false, foreign_key: true |
-| purchaser_id    | references | null: false, foreign_key: true |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
 belongs_to : user
-belongs_to :purchaser
+has_one :purchaser
 
 
 
@@ -46,15 +43,12 @@ belongs_to :purchaser
 
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
-| user_id        | references | null: false, foreign_key: true |
-| item_id        | references | null: false, foreign_key: true |
-| card_name      | string     | null: false                    |
-| effective_date | integer    | null: false                    |
-| security_code  | integer    | null: false                    |
+| user           | references | null: false, foreign_key: true |
+| item           | references | null: false, foreign_key: true |
 
 ### Association
 belongs_to :user
-has_many :items
+belongs_to :items
 has_one :delivery_address
 
 
@@ -63,14 +57,13 @@ has_one :delivery_address
 
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
-| purchaser_id   | references | null: false, foreign_key: true |
-| postcord       | integer    | null: false                    |
-| prefecture     | string     | null: false                    |
+| purchaser      | references | null: false, foreign_key: true |
+| postcord       | string     | null: false                    |
+| prefecture_id  | integer     | null: false                    |
 | city           | string     | null: false                    |
 | address        | string     | null: false                    |
-| building       | string     | null: false                    |
-| phone          | integer    | null: false                    |
-| price          | integer    | null: false                    |
+| building       | string     |                                |
+| phone          | string     | null: false                    |
 
 ### Association
 belongs_to :purchaser
