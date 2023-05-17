@@ -128,7 +128,7 @@
     </div>
     <ul class='item-lists'>
 
-      <% @items.each do |item| %>
+      <%# @items.each do |item| %>
         <li class='list'>
           <%= link_to "#" do %>
           <div class='item-img-content'>
@@ -143,17 +143,18 @@
           </div>
           <div class='item-info'>
             <h3 class='item-name'>
-              <%= item.name %>
+              <%= "商品名" %>
+              <%#= item.name %>
             </h3>
             <div class='item-price'>
-              <span><%= item.price %>円<br><%= item.shipping_day_id %></span>
+              <span><%= "販売価格" %>円<br><%= '配送料負担' %></span>
               <div class='star-btn'>
                 <%= image_tag "star.png", class:"star-icon" %>
                 <span class='star-count'>0</span>
               </div>
             </div>
           </div>
-          <% end %>
+          <%# end %>
         </li>
       <% end %>
 
