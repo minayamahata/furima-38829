@@ -101,12 +101,12 @@ RSpec.describe User, type: :model do
       it 'first_nameが半角では登録できない' do
         @user.first_name = 'aaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name 全角文字を使用してください")
+        expect(@user.errors.full_messages).to include('First name 全角文字を使用してください')
       end
       it 'family_nameが半角では登録できない' do
         @user.family_name = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name 全角文字を使用してください")
+        expect(@user.errors.full_messages).to include('Family name 全角文字を使用してください')
       end
       it 'first_name_kanaが空では登録できない' do
         @user.first_name_kana = ''
@@ -121,12 +121,12 @@ RSpec.describe User, type: :model do
       it 'first_name_kanaが半角では登録できない' do
         @user.first_name_kana = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana はカタカナで入力して下さい。")
+        expect(@user.errors.full_messages).to include('First name kana はカタカナで入力して下さい。')
       end
       it 'family_name_kanaが半角では登録できない' do
         @user.family_name_kana = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name kana はカタカナで入力して下さい。")
+        expect(@user.errors.full_messages).to include('Family name kana はカタカナで入力して下さい。')
       end
       it 'birthdayが空では登録できない' do
         @user.birthday = ''
