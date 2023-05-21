@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_furima, only: [:edit, :update, :destroy]
-  before_action :prevent_url, only: [:edit, :update, :destroy]
+  before_action :set_furima, only: [:edit, :update, :show]
+  before_action :prevent_url, only: [:edit, :update]
 
   def index
     @items = Item.order('created_at DESC')
@@ -21,21 +21,18 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
     @item.update(item_params)
-    if @item.save
-      redirect_to item_path
+    if  @item.update(item_params)
+      redirect_to item_path(@item.id)
     else
       render :edit
     end
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
     private
