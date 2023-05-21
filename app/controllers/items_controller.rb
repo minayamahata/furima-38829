@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_furima, only: [:edit, :update, :show]
-  before_action :prevent_url, only: [:edit, :update]
+  before_action :set_furima, only: [:edit, :update, :show, :destroy]
+  before_action :prevent_url, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.order('created_at DESC')
@@ -29,6 +29,13 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    if current_user.id == @item.user_id
+       @item.destroy
+      end
+       redirect_to root_path
   end
 
   def show
