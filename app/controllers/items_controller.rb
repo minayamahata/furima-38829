@@ -53,7 +53,7 @@ class ItemsController < ApplicationController
     end
 
     def prevent_url
-    if @item.user_id != current_user.id
+    if @item.user_id != current_user.id || @item.order != nil 
       redirect_to root_path
     end
   end
