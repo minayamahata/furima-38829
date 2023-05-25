@@ -1,15 +1,15 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_furima, only: [:index, :create]
+
   def index
     @order_delivery_address = OrderDeliveryAddress.new
-    @item = Item.find(params[:item_id])
     if current_user == @item.user || @item.order.present?
       redirect_to root_path
       end
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_delivery_address = OrderDeliveryAddress.new(order_params)
     if @order_delivery_address.valid?
       pay_item
@@ -24,6 +24,10 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order_delivery_address).permit(:postcord, :prefecture_id, :city, :address, :building, :phone).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+  end
+
+  def set_furima
+    @item = Item.find(params[:item_id])
   end
 
   def pay_item

@@ -3,12 +3,11 @@ class OrderDeliveryAddress
   attr_accessor :postcord, :prefecture_id, :city, :address, :building, :phone, :user_id, :item_id, :token
 
   with_options presence: true do
-    validates :user_id
+    validates :city, :address, :token, :item_id, :user_id
     validates :postcord, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :phone, format: {with: /\A\d{10,11}\z/, message: "number is invalid."}
   end
   validates :prefecture_id, numericality: {other_than: 1, message: "can't be blank"}
-  validates :city, :address, :token, presence: true
 
   def save
     # 配送先情報を保存し、変数orderに代入する

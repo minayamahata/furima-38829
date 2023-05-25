@@ -54,6 +54,31 @@ RSpec.describe OrderDeliveryAddress, type: :model do
         @order_delivery_address.valid?
         expect(@order_delivery_address.errors.full_messages).to include("Phone number is invalid.")
       end
+      it 'phoneは、9桁以下では登録できない' do
+        @order_delivery_address.phone='123456789'
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include("Phone number is invalid.")
+      end
+      it 'phoneは、12桁以上では登録できない' do
+        @order_delivery_address.phone='1234567892345'
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include("Phone number is invalid.")
+      end
+      it 'phoneは、半角数字以外が含まれていると登録できない' do
+        @order_delivery_address.phone='090-1234-56'
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include("Phone number is invalid.")
+      end
+      it "user_idが空では登録できないこと" do
+        @order_delivery_address.user_id = nil
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idが空では登録できないこと" do
+        @order_delivery_address.item_id = nil
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include("Item can't be blank")
+      end
       it "tokenが空では登録できないこと" do
         @order_delivery_address.token = nil
         @order_delivery_address.valid?
